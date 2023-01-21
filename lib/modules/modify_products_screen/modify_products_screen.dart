@@ -12,56 +12,56 @@ class ModifyProductsScreen extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final List<Products>? products = arg['products'];
     List<Widget> _locations = [
-      Container(
-        height: 300,
-        padding: EdgeInsets.all(10),
-        child: Image.network(
-          endPointImage + products![0].product!.image.toString(),
-          fit: BoxFit.cover,
-          height: 300,
-          width: 200,
-        ),
-      ),
-      Container(
-        height: 300,
-        padding: EdgeInsets.all(10),
-        child: Image.network(
-          endPointImage + products![0].product!.image.toString(),
-          fit: BoxFit.cover,
-          height: 300,
-          width: 200,
-        ),
-      ),
-      Container(
-        height: 300,
-        padding: EdgeInsets.all(10),
-        child: Image.network(
-          endPointImage + products![0].product!.image.toString(),
-          fit: BoxFit.cover,
-          height: 300,
-          width: 200,
-        ),
-      ),
-      Container(
-        height: 300,
-        padding: EdgeInsets.all(10),
-        child: Image.network(
-          endPointImage + products![0].product!.image.toString(),
-          fit: BoxFit.cover,
-          height: 300,
-          width: 200,
-        ),
-      ),
-      Container(
-        height: 300,
-        padding: EdgeInsets.all(10),
-        child: Image.network(
-          endPointImage + products![0].product!.image.toString(),
-          fit: BoxFit.cover,
-          height: 300,
-          //    width: 200,
-        ),
-      ),
+      // Container(
+      //   height: 300,
+      //   padding: EdgeInsets.all(10),
+      //   child: Image.network(
+      //     endPointImage + products![0].product!.image.toString(),
+      //     fit: BoxFit.cover,
+      //     height: 300,
+      //     width: 200,
+      //   ),
+      // ),
+      // Container(
+      //   height: 300,
+      //   padding: EdgeInsets.all(10),
+      //   child: Image.network(
+      //     endPointImage + products![0].product!.image.toString(),
+      //     fit: BoxFit.cover,
+      //     height: 300,
+      //     width: 200,
+      //   ),
+      // ),
+      // Container(
+      //   height: 300,
+      //   padding: EdgeInsets.all(10),
+      //   child: Image.network(
+      //     endPointImage + products![0].product!.image.toString(),
+      //     fit: BoxFit.cover,
+      //     height: 300,
+      //     width: 200,
+      //   ),
+      // ),
+      // Container(
+      //   height: 300,
+      //   padding: EdgeInsets.all(10),
+      //   child: Image.network(
+      //     endPointImage + products![0].product!.image.toString(),
+      //     fit: BoxFit.cover,
+      //     height: 300,
+      //     width: 200,
+      //   ),
+      // ),
+      // Container(
+      //   height: 300,
+      //   padding: EdgeInsets.all(10),
+      //   child: Image.network(
+      //     endPointImage + products![0].product!.image.toString(),
+      //     fit: BoxFit.cover,
+      //     height: 300,
+      //     //    width: 200,
+      //   ),
+      // ),
 
       // SingleChildScrollView(
       //   child: Column(
