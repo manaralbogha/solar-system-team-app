@@ -5,6 +5,7 @@ import 'package:solar_system_team/shared/network/remote/dio_helper.dart';
 
 import '../../../models/model_get_appointment_team.dart';
 import '../../../models/model_get_order_by_id.dart';
+import '../../../models/model_product_for_company.dart';
 
 class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
   HomeSolarSystemTeamCubit() : super(HomeSolarSystemTeamInitialState());
@@ -47,5 +48,63 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
       print(error.toString());
       emit(ShowDetailsErrorsState());
     });
+  }
+
+  ProductForCompanyModel? allProductsByCompanyId;
+  List<CompanyProducts>? panel = [];
+  List<CompanyProducts>? batter = [];
+  List<CompanyProducts>? inverter = [];
+  List<CompanyProducts>? generator = [];
+  List<CompanyProducts>? otherProducts = [];
+
+  void getProductsForCompanyId({
+    required String token,
+    required int idCompany,
+  }) {
+    print(idCompany);
+    emit(GetCategoryForProductIdLoadingState());
+
+    DioHelper.getData(url: '$endPoint/company/productID', token: token, query: {
+      'company_id': idCompany,
+    }).then((value) async {
+      allProductsByCompanyId = ProductForCompanyModel.fromJson(value.data);
+      filterProductsByCompanyId(idCompany: idCompany);
+      //  print(value.data);
+      // print(panel);
+      // print(batter);
+      // print(inverter);
+      // print(generator);
+      print(otherProducts);
+
+      emit(
+        GetCategoryForProductIdSuccessState(
+            panel: panel,
+            batter: batter,
+            inverter: inverter,
+            generator: generator),
+      );
+    }).catchError((error) {
+      emit(GetCategoryForProductIdErrorsState());
+    });
+  }
+
+  void filterProductsByCompanyId({
+    required int idCompany,
+  }) {
+    allProductsByCompanyId!.data![0].products.forEach(
+      (element) {
+        if (element.categore!.id == 2) {
+          panel!.add(element);
+        } else if (element.categore!.id == 3) {
+          inverter!.add(element);
+        } else if (element.categore!.id == 4) {
+          batter!.add(element);
+        } else if (element.categore!.id == 5) {
+          generator!.add(element);
+        } else {
+          otherProducts!.add(element);
+        }
+      },
+    );
   }
 }

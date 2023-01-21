@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'layout/home_solar_system_team_screen/cubit/cubit.dart';
 import 'layout/home_solar_system_team_screen/home_solar_system_team_screen.dart';
 import 'modules/login_screen/login_screen.dart';
+import 'modules/modify_products_screen/modify_products_screen.dart';
 import 'modules/order_screen/order_screen.dart';
 import 'shared/const/const.dart';
 import 'shared/network/local/cache_helper.dart';
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
           '/': (context) => LoginScreen(),
           '/HomeSolarSystemTeamScreen': (context) =>
               HomeSolarSystemTeamScreen(),
-          '/OrderScreen': (context) => OrderScreen()
+          '/OrderScreen': (context) => OrderScreen(),
+          '/ModifyProductsScreen': (context) => ModifyProductsScreen()
         },
       ),
     );

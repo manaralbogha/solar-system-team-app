@@ -22,7 +22,7 @@ class RowTextText extends StatelessWidget {
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 144, 147, 32),
+            color: Color.fromARGB(255, 168, 168, 10),
           ),
         ),
         // SizedBox(
