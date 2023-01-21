@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "339018358380",
+    "project_id": "solar-system-7ffca",
+    "storage_bucket": "solar-system-7ffca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339018358380:android:30b08cc3a587a396a78249",
+        "android_client_info": {
+          "package_name": "com.example.solar_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339018358380-cutlv2597hhffptn8h0927vohl2jailo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnqcENHjheLtPNRCb-Q-m4ybt2EXlqe8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339018358380-cutlv2597hhffptn8h0927vohl2jailo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "339018358380-hsjt5tehbblium2a6mjkvi59smd4llvq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.solarSystem"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:339018358380:android:ded6c866c629b36ca78249",
+        "android_client_info": {
+          "package_name": "com.example.solar_system_team"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "339018358380-cutlv2597hhffptn8h0927vohl2jailo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnqcENHjheLtPNRCb-Q-m4ybt2EXlqe8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "339018358380-cutlv2597hhffptn8h0927vohl2jailo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "339018358380-hsjt5tehbblium2a6mjkvi59smd4llvq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.solarSystem"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
