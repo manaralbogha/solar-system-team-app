@@ -182,9 +182,9 @@ class LocationUser {
 class Products {
   Product? product;
   int? id;
-  int? productAmmount;
+  late int productAmmount;
 
-  Products({this.product, this.id, this.productAmmount});
+  Products({this.product, this.id, required this.productAmmount});
 
   Products.fromJson(Map<String, dynamic> json) {
     product =
@@ -210,6 +210,7 @@ class Product {
   String? image;
   String? price;
   int? available;
+  bool showProducts = false;
   Categore? categore;
   List<Features>? features;
 
@@ -219,6 +220,7 @@ class Product {
       this.image,
       this.price,
       this.available,
+      required this.showProducts,
       this.categore,
       this.features});
 

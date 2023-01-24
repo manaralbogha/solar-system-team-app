@@ -48,6 +48,10 @@ class GridViewProductWidget extends StatelessWidget {
                   const Spacer(),
                   ElevatedButton(
                     onPressed: () {
+                      cubit.panel = [];
+                      cubit.batter = [];
+                      cubit.inverter = [];
+                      cubit.generator = [];
                       cubit.getProductsForCompanyId(
                           token: token,
                           idCompany: orderById!.data!.appointment!.compane!.id!
@@ -55,7 +59,10 @@ class GridViewProductWidget extends StatelessWidget {
                       Navigator.pushNamed(
                         context,
                         '/ModifyProductsScreen',
-                        arguments: {'products': products},
+                        arguments: {
+                          'products': products,
+                          'orderById': orderById
+                        },
                       );
                     },
                     child: const Text(

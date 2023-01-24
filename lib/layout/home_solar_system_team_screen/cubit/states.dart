@@ -33,3 +33,11 @@ class GetCategoryForProductIdSuccessState extends HomeSolarSystemTeamStates {
 }
 
 class GetCategoryForProductIdErrorsState extends HomeSolarSystemTeamStates {}
+
+class ShowProductForChange extends HomeSolarSystemTeamStates {}
+
+class ProductChange extends HomeSolarSystemTeamStates {}
+
+class AddAmount extends HomeSolarSystemTeamStates {}
+
+class MinusAmount extends HomeSolarSystemTeamStates {}

@@ -10,8 +10,10 @@ import '../../../models/model_product_for_company.dart';
 class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
   HomeSolarSystemTeamCubit() : super(HomeSolarSystemTeamInitialState());
   static HomeSolarSystemTeamCubit get(context) => BlocProvider.of(context);
-
+  List<Map<String, dynamic>> listDeviceMap = [];
+  List<Map<String, dynamic>> listProductsMap = [];
   GetAppointmentTeamModel? teamAppointment;
+
   void appointmentTeam({
     required String token,
   }) {
@@ -106,5 +108,123 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
         }
       },
     );
+  }
+
+  void productChange({
+    required int? idGeneralProduct,
+    required CompanyProducts companyProducts,
+  }) {
+    orderById!.data!.products!.forEach((element) {
+      if (element.product!.categore!.id == companyProducts.categore!.id) {
+        element.product!.image = companyProducts.image;
+        element.product!.name = companyProducts.name;
+        element.product!.price = companyProducts.price;
+        //  element.product!.features = companyProducts.features as List<CompanyFeatures>;
+        element.productAmmount = companyProducts.quantity;
+        element.product!.id = companyProducts.id;
+        element.id = companyProducts.id;
+        element.product!.available = companyProducts.available;
+        element.product!.categore!.id = companyProducts.categore!.id;
+        element.product!.categore!.name = companyProducts.categore!.name;
+        element.product!.features!.forEach((element) {
+          companyProducts.features!.forEach((element1) {
+            if (element.name == element1.name) {
+              element.id = element1.id;
+              element.name = element1.name;
+              element.suffix = element1.suffix;
+              element.type = element1.type;
+              element.value = element1.value;
+            }
+          });
+        });
+      }
+    });
+    emit(ProductChange());
+  }
+
+  void showProductForChange(Products product) {
+    product.product!.showProducts = !product.product!.showProducts;
+
+    print(product.product!.showProducts);
+    emit(ShowProductForChange());
+  }
+
+  void addProductsToMap(
+    List<Products> productsSelected,
+  ) {
+    listProductsMap = [];
+    for (var element in productsSelected) {
+      listProductsMap.add({
+        "product_id": element.id,
+        "ammount": element.productAmmount,
+      });
+    }
+    print(listProductsMap.toList());
+  }
+
+  void addDevicesToMap(
+    List<Devices> deviceCheck,
+  ) {
+    listDeviceMap = [];
+    for (var element in deviceCheck) {
+      listDeviceMap.add({
+        "device_id": element.id,
+        "ammount": element.deviceAmmount,
+      });
+    }
+
+    print(listDeviceMap.toString());
+  }
+
+  void updateOrder({
+    required int idOrder,
+    required String token,
+    required String totalVoltage,
+    required String totalPrice,
+    required String hoursOnCharge,
+    required String hoursOnBattery,
+    required String space,
+    required double lat,
+    required double long,
+    required String area,
+    required List<Map<String, dynamic>> products,
+    required List<Map<String, dynamic>> devices,
+  }) {
+    DioHelper.putData(
+      url: "$endPoint/order/update/$idOrder",
+      data: {
+        "order": {
+          "total_voltage": totalVoltage,
+          "total_price": totalPrice,
+          "hours_on_charge": hoursOnCharge,
+          "hours_on_bettary": hoursOnBattery,
+          "space": space,
+          "lat": lat,
+          "long": long,
+          "area": area
+        },
+        "products": products,
+        "devices": devices,
+      },
+      token: token,
+    ).then((value) {
+      print(value.data);
+    }).catchError((error) {
+      print(error.toString());
+    });
+  }
+
+  void addAmount(Products product) {
+    product.productAmmount += 1;
+    print(product.productAmmount);
+    emit(AddAmount());
+  }
+
+  void minusAmount(Products product) {
+    if (product.productAmmount > 1) {
+      product.productAmmount -= 1;
+      print(product.productAmmount);
+      emit(MinusAmount());
+    }
   }
 }
