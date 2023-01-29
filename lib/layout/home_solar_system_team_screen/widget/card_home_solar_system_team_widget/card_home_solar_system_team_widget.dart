@@ -5,17 +5,19 @@ import 'package:solar_system_team/layout/home_solar_system_team_screen/cubit/sta
 
 import '../../../../models/model_get_appointment_team.dart';
 import '../../../../shared/components/row_text_text_widget.dart';
+import '../../../../shared/components/text_form_filed_widget.dart';
 import '../../../../shared/const/const.dart';
 import '../../cubit/cubit.dart';
 import '../container_user_details_widget/container_user_details_widget.dart';
+import 'dialog_for_number_of_installation_days_widget/dialog_for_number_of_installation_days_widget.dart';
 
 class CardHomeSolarSystemTeamWidget extends StatelessWidget {
   CardHomeSolarSystemTeamWidget(
       {super.key,
       required this.teamAppointment,
       required this.teamAppointments});
-  Data teamAppointment;
-  List<Data>? teamAppointments;
+  DataAppointment teamAppointment;
+  List<DataAppointment>? teamAppointments;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +40,7 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   'APPOINTMENT',
@@ -114,11 +117,12 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
                       onPressed: () {
                         cubit.orderById = null;
 
-                        cubit.getOrderById(
-                            token: token, idOrder: teamAppointment.id);
                         Navigator.pushNamed(
                           context,
                           '/OrderScreen',
+                          arguments: {
+                            'teamAppointment': teamAppointment,
+                          },
                         );
                         teamAppointments?.forEach((element) {
                           element.customerDetails = false;
@@ -128,6 +132,9 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
                     ),
                   ],
                 ),
+                if (teamAppointment.type == 'detection')
+                  DialogForNumberOfInstallationDaysWidget(
+                      idOrder: teamAppointment.id!.toInt()),
               ],
             ),
           ),

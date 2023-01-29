@@ -4,14 +4,19 @@ import 'package:solar_system_team/layout/home_solar_system_team_screen/cubit/cub
 import 'package:solar_system_team/layout/home_solar_system_team_screen/cubit/states.dart';
 import 'package:solar_system_team/shared/const/const.dart';
 
+import '../../../../models/model_get_appointment_team.dart';
 import '../../../../models/model_get_order_by_id.dart';
 import '../card_product/card_product.dart';
 
 class GridViewProductWidget extends StatelessWidget {
   const GridViewProductWidget(
-      {super.key, required this.products, required this.orderById});
+      {super.key,
+      required this.products,
+      required this.orderById,
+      required this.teamAppointment});
   final List<Products>? products;
   final OrderByIdModel? orderById;
+  final DataAppointment teamAppointment;
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +40,48 @@ class GridViewProductWidget extends StatelessWidget {
           margin: const EdgeInsets.all(8),
           child: Column(
             children: [
-              Row(
-                children: [
-                  const Text(
+              Builder(builder: (context) {
+                if (teamAppointment.type == "detection") {
+                  return Row(
+                    children: [
+                      const Text(
+                        'PRODUCTS',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.brown,
+                        ),
+                      ),
+                      const Spacer(),
+                      ElevatedButton(
+                        onPressed: () {
+                          cubit.panel = [];
+                          cubit.batter = [];
+                          cubit.inverter = [];
+                          cubit.generator = [];
+                          cubit.getProductsForCompanyId(
+                              token: token,
+                              idCompany: orderById!
+                                  .data!.appointment!.compane!.id!
+                                  .toInt());
+                          Navigator.pushNamed(
+                            context,
+                            '/ModifyProductsScreen',
+                            arguments: {
+                              'products': products,
+                              'orderById': orderById
+                            },
+                          );
+                        },
+                        child: const Text(
+                          'Edit Products',
+                        ),
+                      ),
+                    ],
+                  );
+                }
+                return const Center(
+                  child: Text(
                     'PRODUCTS',
                     style: TextStyle(
                       fontSize: 28,
@@ -45,32 +89,8 @@ class GridViewProductWidget extends StatelessWidget {
                       color: Colors.brown,
                     ),
                   ),
-                  const Spacer(),
-                  ElevatedButton(
-                    onPressed: () {
-                      cubit.panel = [];
-                      cubit.batter = [];
-                      cubit.inverter = [];
-                      cubit.generator = [];
-                      cubit.getProductsForCompanyId(
-                          token: token,
-                          idCompany: orderById!.data!.appointment!.compane!.id!
-                              .toInt());
-                      Navigator.pushNamed(
-                        context,
-                        '/ModifyProductsScreen',
-                        arguments: {
-                          'products': products,
-                          'orderById': orderById
-                        },
-                      );
-                    },
-                    child: const Text(
-                      'Edit Products',
-                    ),
-                  ),
-                ],
-              ),
+                );
+              }),
               Expanded(
                 child: GridView.builder(
                   physics: const BouncingScrollPhysics(),

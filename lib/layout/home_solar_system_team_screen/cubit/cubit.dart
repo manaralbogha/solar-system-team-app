@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:solar_system_team/layout/home_solar_system_team_screen/cubit/states.dart';
 import 'package:solar_system_team/shared/const/const.dart';
@@ -13,6 +14,8 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
   List<Map<String, dynamic>> listDeviceMap = [];
   List<Map<String, dynamic>> listProductsMap = [];
   GetAppointmentTeamModel? teamAppointment;
+  bool isAddOtherProduct = false;
+  var installationDayController = TextEditingController();
 
   void appointmentTeam({
     required String token,
@@ -58,6 +61,7 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
   List<CompanyProducts>? inverter = [];
   List<CompanyProducts>? generator = [];
   List<CompanyProducts>? otherProducts = [];
+  List<Product> allProductCompany = [];
 
   void getProductsForCompanyId({
     required String token,
@@ -68,15 +72,23 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
 
     DioHelper.getData(url: '$endPoint/company/productID', token: token, query: {
       'company_id': idCompany,
-    }).then((value) async {
+    }).then((value) {
+      // print(value.data);
       allProductsByCompanyId = ProductForCompanyModel.fromJson(value.data);
+      // print(allProductsByCompanyId!.data![0].products.length);
+      allProductCompany = [];
+      value.data['data'][0]["products"].forEach((element) {
+        allProductCompany.add(Product.fromJson(element));
+      });
+      print(allProductCompany.length);
+
       filterProductsByCompanyId(idCompany: idCompany);
       //  print(value.data);
       // print(panel);
       // print(batter);
       // print(inverter);
       // print(generator);
-      print(otherProducts);
+      //  print(otherProducts);
 
       emit(
         GetCategoryForProductIdSuccessState(
@@ -227,4 +239,56 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
       emit(MinusAmount());
     }
   }
+
+  void addOtherProduct() {
+    isAddOtherProduct = !isAddOtherProduct;
+    emit(AddOtherProduct());
+  }
+
+  void deleteProductsFromOrder(Products product) {
+    orderById!.data!.products!
+        .removeWhere((element) => element.id == product.id);
+    emit(DeleteProductsFromOrder());
+  }
+
+  void installationAppointment(
+      {required String token,
+      required int installationDays,
+      required int idOrder}) {
+    DioHelper.postData(
+            url: '$endPoint/appointment/installation/$idOrder',
+            data: {
+              'days': installationDays,
+            },
+            token: token)
+        .then((value) {
+      print(value.data);
+    }).catchError((error) {
+      print(error.toString());
+    });
+  }
+
+  void location(double lat, double lng) {
+    DioHelper.getData(
+            url:
+                'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=AIzaSyAQv95_r6j28m9Rnu65oC8l_F71fYGcK_8')
+        .then((value) {
+      print(value.data);
+    }).catchError((onError) {
+      print(onError.toString());
+    });
+  }
+
+  // Future<http.Response> getLocationInfo(double lat, double lng) async {
+  //   final String url =
+  //       'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=YOUR_API_KEY';
+
+  //   final response = await http.get(url);
+
+  //   if (response.statusCode == 200) {
+  //     return response;
+  //   } else {
+  //     throw Exception('Failed to get location information');
+  //   }
+  // }
 }

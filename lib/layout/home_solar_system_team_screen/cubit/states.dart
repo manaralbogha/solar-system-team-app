@@ -41,3 +41,7 @@ class ProductChange extends HomeSolarSystemTeamStates {}
 class AddAmount extends HomeSolarSystemTeamStates {}
 
 class MinusAmount extends HomeSolarSystemTeamStates {}
+
+class AddOtherProduct extends HomeSolarSystemTeamStates {}
+
+class DeleteProductsFromOrder extends HomeSolarSystemTeamStates {}

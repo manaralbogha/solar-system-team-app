@@ -35,7 +35,7 @@ class CardModifyProductWidget extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  //crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
                       child: Image.network(
@@ -75,6 +75,7 @@ class CardModifyProductWidget extends StatelessWidget {
                         // )
                         Container(
                           height: 30,
+                          // width: double.infinity,
                           child: Row(
                             // crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -86,9 +87,9 @@ class CardModifyProductWidget extends StatelessWidget {
                                   color: Color.fromARGB(255, 168, 168, 10),
                                 ),
                               ),
-                              const SizedBox(
-                                width: 30,
-                              ),
+                              // const SizedBox(
+                              //   width: 30,
+                              // ),
                               IconButton(
                                   onPressed: () {
                                     cubit.minusAmount(product);
@@ -98,7 +99,13 @@ class CardModifyProductWidget extends StatelessWidget {
                                   )),
                               Text(
                                 product.productAmmount.toString(),
-                                style: const TextStyle(fontSize: 25),
+                                style: TextStyle(
+                                  fontSize: product.productAmmount < 10
+                                      ? 20
+                                      : product.productAmmount < 100
+                                          ? 15
+                                          : 10,
+                                ),
                               ),
                               IconButton(
                                   onPressed: () {
@@ -113,6 +120,14 @@ class CardModifyProductWidget extends StatelessWidget {
                         ),
                       ],
                     ),
+                    IconButton(
+                        onPressed: () {
+                          cubit.deleteProductsFromOrder(product);
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        )),
                   ],
                 ),
                 if (product.product!.showProducts == true)

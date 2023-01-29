@@ -7,7 +7,7 @@ import '../card_home_solar_system_team_widget/card_home_solar_system_team_widget
 class ListViewHomeSolarSystemTeamWidget extends StatelessWidget {
   ListViewHomeSolarSystemTeamWidget(
       {super.key, required this.teamAppointments});
-  List<Data>? teamAppointments;
+  List<DataAppointment>? teamAppointments;
 
   @override
   Widget build(BuildContext context) {

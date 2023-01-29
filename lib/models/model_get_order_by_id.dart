@@ -211,6 +211,7 @@ class Product {
   String? price;
   int? available;
   bool showProducts = false;
+  int quantity = 1;
   Categore? categore;
   List<Features>? features;
 
@@ -221,6 +222,7 @@ class Product {
       this.price,
       this.available,
       required this.showProducts,
+      required this.quantity,
       this.categore,
       this.features});
 

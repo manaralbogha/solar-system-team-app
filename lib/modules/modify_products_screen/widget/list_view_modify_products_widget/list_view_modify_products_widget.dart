@@ -5,8 +5,11 @@ import 'package:solar_system_team/layout/home_solar_system_team_screen/cubit/sta
 
 import '../../../../models/model_get_order_by_id.dart';
 
+import '../../../../shared/components/row_text_text_widget.dart';
 import '../../../../shared/const/const.dart';
+import '../add_other_products_widget/List_view_add_other_products_widget/list_view_add_other_products_widget.dart';
 import '../card_modify_products_widget/card_modify_products_widget.dart';
+import '../list_view_to_one_type_of_product_widget/list_view_to_one_type_of_product_widget.dart';
 
 class ListViewModifyProductsWidget extends StatelessWidget {
   const ListViewModifyProductsWidget(
@@ -32,6 +35,18 @@ class ListViewModifyProductsWidget extends StatelessWidget {
                   );
                 },
               ),
+            ),
+            if (cubit.isAddOtherProduct == true)
+              ListViewAddOtherProductsWidget(
+                  allProductCompany: cubit.allProductCompany,
+                  products: products),
+            ElevatedButton(
+              onPressed: () {
+                cubit.addOtherProduct();
+
+                print(cubit.isAddOtherProduct);
+              },
+              child: const Text('Add Other Products'),
             ),
             ElevatedButton(
               onPressed: () {

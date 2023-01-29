@@ -1,6 +1,6 @@
 class GetAppointmentTeamModel {
   bool? success;
-  List<Data>? data;
+  List<DataAppointment>? data;
   String? message;
 
   GetAppointmentTeamModel({this.success, this.data, this.message});
@@ -8,9 +8,9 @@ class GetAppointmentTeamModel {
   GetAppointmentTeamModel.fromJson(Map<String, dynamic> json) {
     success = json['success'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <DataAppointment>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(DataAppointment.fromJson(v));
       });
     }
     message = json['message'];
@@ -27,7 +27,7 @@ class GetAppointmentTeamModel {
   }
 }
 
-class Data {
+class DataAppointment {
   int? id;
   String? type;
   String? status;
@@ -38,7 +38,7 @@ class Data {
   Compane? compane;
   Team? team;
 
-  Data({
+  DataAppointment({
     this.id,
     this.type,
     this.status,
@@ -50,7 +50,7 @@ class Data {
     this.customerDetails,
   });
 
-  Data.fromJson(Map<String, dynamic> json) {
+  DataAppointment.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     type = json['type'];
     status = json['status'];
