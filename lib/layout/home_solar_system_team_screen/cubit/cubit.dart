@@ -268,16 +268,16 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
     });
   }
 
-  void location(double lat, double lng) {
-    DioHelper.getData(
-            url:
-                'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=AIzaSyAQv95_r6j28m9Rnu65oC8l_F71fYGcK_8')
-        .then((value) {
-      print(value.data);
-    }).catchError((onError) {
-      print(onError.toString());
-    });
-  }
+  // void location(double lat, double lng) {
+  //   DioHelper.getData(
+  //           url:
+  //               'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$lng&key=AIzaSyAQv95_r6j28m9Rnu65oC8l_F71fYGcK_8')
+  //       .then((value) {
+  //     print(value.data);
+  //   }).catchError((onError) {
+  //     print(onError.toString());
+  //   });
+  // }
 
   // Future<http.Response> getLocationInfo(double lat, double lng) async {
   //   final String url =
