@@ -45,3 +45,9 @@ class MinusAmount extends HomeSolarSystemTeamStates {}
 class AddOtherProduct extends HomeSolarSystemTeamStates {}
 
 class DeleteProductsFromOrder extends HomeSolarSystemTeamStates {}
+
+class InstallationAppointmentLoadingState extends HomeSolarSystemTeamStates {}
+
+class InstallationAppointmentSuccessState extends HomeSolarSystemTeamStates {}
+
+class InstallationAppointmentErrorsState extends HomeSolarSystemTeamStates {}

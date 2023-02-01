@@ -255,6 +255,7 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
       {required String token,
       required int installationDays,
       required int idOrder}) {
+    emit(InstallationAppointmentLoadingState());
     DioHelper.postData(
             url: '$endPoint/appointment/installation/$idOrder',
             data: {
@@ -263,8 +264,10 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
             token: token)
         .then((value) {
       print(value.data);
+      emit(InstallationAppointmentSuccessState());
     }).catchError((error) {
       print(error.toString());
+      emit(InstallationAppointmentErrorsState());
     });
   }
 

@@ -14,9 +14,7 @@ class DialogForNumberOfInstallationDaysWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
     return BlocConsumer<HomeSolarSystemTeamCubit, HomeSolarSystemTeamStates>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         var cubit = HomeSolarSystemTeamCubit.get(context);
         return SizedBox(
@@ -45,7 +43,7 @@ class DialogForNumberOfInstallationDaysWidget extends StatelessWidget {
                             buildTextFormFiled(
                               lableText: ('The number of installation days'),
                               controller: cubit.installationDayController,
-                              iconPri: Icon(Icons.date_range),
+                              iconPri: const Icon(Icons.date_range),
                               textType: TextInputType.number,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -85,6 +83,7 @@ class DialogForNumberOfInstallationDaysWidget extends StatelessWidget {
                                   cubit.installationDayController.text),
                               idOrder: idOrder,
                             );
+
                             Navigator.pop(context);
                             //cubit.appointmentInstallation();
                             cubit.appointmentTeam(token: token);

@@ -12,7 +12,26 @@ class HomeSolarSystemTeamScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeSolarSystemTeamCubit, HomeSolarSystemTeamStates>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state is InstallationAppointmentSuccessState) {
+          // ignore: prefer_const_constructors
+          final snackBar = SnackBar(
+            content: const Text(
+                'The number of installation days has been determined',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20)),
+            backgroundColor: Colors.green,
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
+        if (state is InstallationAppointmentErrorsState) {
+          // ignore: prefer_const_constructors
+          final snackBar = SnackBar(
+            content: const Text('No Internet Please Try Again Later',
+                textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
+            backgroundColor: Colors.red,
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
       },
       builder: (context, state) {
         var cubit = HomeSolarSystemTeamCubit.get(context);

@@ -44,14 +44,15 @@ class LoginCubit extends Cubit<LoginStates> {
       emit(LoginSuccessState(login));
     }).catchError((error) {
       String? message;
-      if (error is DioError) {
-        message = error.response!.data['data'];
-        // print(error.response!.data['data']);
-        // print(error.message);
-      }
+      print(error.toString());
+      // if (error is DioError) {
+      //   message = error.response!.data['data'];
+      //   // print(error.response!.data['data']);
+      //   // print(error.message);
+      // }
       // final body = json.decode(onError.data.toString());
       //  print(error.toString());
-
+      message = 'hjghghghghfggfgfgf';
       emit(LoginErrorState(error.toString(), message));
     });
   }
