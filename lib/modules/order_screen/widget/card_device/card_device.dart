@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
 
+import '../../../../models/model_get_appointment_team.dart';
 import '../../../../models/model_get_order_by_id.dart';
 import '../../../../shared/components/row_text_text_widget.dart';
 import '../../../../shared/const/const.dart';
 
 class CardDeviceWidget extends StatelessWidget {
-  const CardDeviceWidget({super.key, required this.device});
+  const CardDeviceWidget(
+      {super.key, required this.device, required this.teamAppointment});
   final Devices device;
+  final DataAppointment teamAppointment;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(
-        side: const BorderSide(
+        side: BorderSide(
           width: 1,
-          color: Colors.green,
+          color: teamAppointment.status == 'done'
+              ? Colors.green
+              : teamAppointment.status == 'accepted'
+                  ? Colors.blue
+                  : teamAppointment.status == 'rejected'
+                      ? Colors.red
+                      : Colors.orange,
         ),
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -23,8 +32,17 @@ class CardDeviceWidget extends StatelessWidget {
         children: [
           Text(
             device.device!.name.toString(),
-            style: const TextStyle(
-                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.brown),
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: teamAppointment.status == 'done'
+                  ? Colors.green
+                  : teamAppointment.status == 'accepted'
+                      ? Colors.blue
+                      : teamAppointment.status == 'rejected'
+                          ? Colors.red
+                          : Colors.orange,
+            ),
           ),
           Center(
             child: Image.network(
@@ -46,7 +64,14 @@ class CardDeviceWidget extends StatelessWidget {
               ),
               color: const Color.fromARGB(19, 33, 149, 243),
               border: Border.all(
-                  color: const Color.fromARGB(255, 76, 175, 79), width: 1),
+                  color: teamAppointment.status == 'done'
+                      ? Colors.green
+                      : teamAppointment.status == 'accepted'
+                          ? Colors.blue
+                          : teamAppointment.status == 'rejected'
+                              ? Colors.red
+                              : Colors.orange,
+                  width: 1),
               // boxShadow: [
               //   BoxShadow(
               //     color: Colors.green.withOpacity(0.5),

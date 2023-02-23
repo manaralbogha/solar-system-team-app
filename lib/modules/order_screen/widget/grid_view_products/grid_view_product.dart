@@ -29,12 +29,19 @@ class GridViewProductWidget extends StatelessWidget {
         return Container(
           height: 400,
           decoration: BoxDecoration(
+            color: const Color.fromARGB(19, 33, 149, 243),
             borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),
-            color: const Color.fromARGB(19, 33, 149, 243),
             border: Border.all(
-                color: const Color.fromARGB(255, 76, 175, 79), width: 1),
+                color: teamAppointment.status == 'done'
+                    ? Colors.green
+                    : teamAppointment.status == 'accepted'
+                        ? Colors.blue
+                        : teamAppointment.status == 'rejected'
+                            ? Colors.red
+                            : Colors.orange,
+                width: 1),
           ),
           padding: const EdgeInsets.all(8),
           margin: const EdgeInsets.all(8),
@@ -44,12 +51,18 @@ class GridViewProductWidget extends StatelessWidget {
                 if (teamAppointment.type == "detection") {
                   return Row(
                     children: [
-                      const Text(
+                      Text(
                         'PRODUCTS',
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.brown,
+                          color: teamAppointment.status == 'done'
+                              ? Colors.green
+                              : teamAppointment.status == 'accepted'
+                                  ? Colors.blue
+                                  : teamAppointment.status == 'rejected'
+                                      ? Colors.red
+                                      : Colors.orange,
                         ),
                       ),
                       const Spacer(),
@@ -80,13 +93,19 @@ class GridViewProductWidget extends StatelessWidget {
                     ],
                   );
                 }
-                return const Center(
+                return Center(
                   child: Text(
                     'PRODUCTS',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
-                      color: Colors.brown,
+                      color: teamAppointment.status == 'done'
+                          ? Colors.green
+                          : teamAppointment.status == 'accepted'
+                              ? Colors.blue
+                              : teamAppointment.status == 'rejected'
+                                  ? Colors.red
+                                  : Colors.orange,
                     ),
                   ),
                 );
@@ -95,7 +114,7 @@ class GridViewProductWidget extends StatelessWidget {
                 child: GridView.builder(
                   physics: const BouncingScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    mainAxisExtent: 320,
+                    mainAxisExtent: 300,
                     childAspectRatio: 3 / 2,
                     //crossAxisSpacing: 2,
                     // mainAxisSpacing: 2,
@@ -106,6 +125,7 @@ class GridViewProductWidget extends StatelessWidget {
                     return CardProductWidget(
                       product: products![indexProducts],
                       products: products,
+                      teamAppointment: teamAppointment,
                     );
                   }),
                 ),

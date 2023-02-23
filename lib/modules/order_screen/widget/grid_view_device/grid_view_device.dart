@@ -1,34 +1,50 @@
 import 'package:flutter/material.dart';
 
+import '../../../../models/model_get_appointment_team.dart';
 import '../../../../models/model_get_order_by_id.dart';
 import '../card_device/card_device.dart';
 
 class GridViewDeviceWidget extends StatelessWidget {
-  const GridViewDeviceWidget({super.key, required this.devices});
+  const GridViewDeviceWidget(
+      {super.key, required this.devices, required this.teamAppointment});
   final List<Devices>? devices;
+  final DataAppointment teamAppointment;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 400,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(
+        color: const Color.fromARGB(19, 33, 149, 243),
+        borderRadius: BorderRadius.all(
           Radius.circular(10),
         ),
-        color: const Color.fromARGB(19, 33, 149, 243),
-        border:
-            Border.all(color: const Color.fromARGB(255, 76, 175, 79), width: 1),
+        border: Border.all(
+            color: teamAppointment.status == 'done'
+                ? Colors.green
+                : teamAppointment.status == 'accepted'
+                    ? Colors.blue
+                    : teamAppointment.status == 'rejected'
+                        ? Colors.red
+                        : Colors.orange,
+            width: 1),
       ),
       padding: const EdgeInsets.all(8),
       margin: const EdgeInsets.all(8),
       child: Column(
         children: [
-          const Text(
+          Text(
             'DEVICES',
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Colors.brown,
+              color: teamAppointment.status == 'done'
+                  ? Colors.green
+                  : teamAppointment.status == 'accepted'
+                      ? Colors.blue
+                      : teamAppointment.status == 'rejected'
+                          ? Colors.red
+                          : Colors.orange,
             ),
           ),
           Expanded(
@@ -45,6 +61,7 @@ class GridViewDeviceWidget extends StatelessWidget {
               itemBuilder: ((context, index) {
                 return CardDeviceWidget(
                   device: devices![index],
+                  teamAppointment: teamAppointment,
                 );
               }),
             ),

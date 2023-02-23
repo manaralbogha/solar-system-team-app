@@ -41,7 +41,8 @@ class OrderScreen extends StatelessWidget {
                           orderById: cubit.orderById,
                           teamAppointment: teamAppointment),
                       GridViewDeviceWidget(
-                          devices: cubit.orderById!.data!.devices),
+                          devices: cubit.orderById!.data!.devices,
+                          teamAppointment: teamAppointment),
                     ],
                   ),
                 );

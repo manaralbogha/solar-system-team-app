@@ -21,7 +21,7 @@ class CardModifyProductWidget extends StatelessWidget {
       builder: (context, state) {
         var cubit = HomeSolarSystemTeamCubit.get(context);
         return Card(
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           shape: RoundedRectangleBorder(
             side: const BorderSide(
               width: 1,
@@ -90,13 +90,12 @@ class CardModifyProductWidget extends StatelessWidget {
                               // const SizedBox(
                               //   width: 30,
                               // ),
-                              IconButton(
-                                  onPressed: () {
+                              InkWell(
+                                  onTap: () {
                                     cubit.minusAmount(product);
                                   },
-                                  icon: const Icon(
-                                    Icons.arrow_left,
-                                  )),
+                                  child: const Icon(Icons.arrow_left)),
+
                               Text(
                                 product.productAmmount.toString(),
                                 style: TextStyle(
@@ -107,19 +106,17 @@ class CardModifyProductWidget extends StatelessWidget {
                                           : 10,
                                 ),
                               ),
-                              IconButton(
-                                  onPressed: () {
+                              InkWell(
+                                  onTap: () {
                                     cubit.addAmount(product);
                                   },
-                                  alignment: Alignment.topCenter,
-                                  icon: const Icon(
-                                    Icons.arrow_right,
-                                  )),
+                                  child: const Icon(Icons.arrow_right)),
                             ],
                           ),
                         ),
                       ],
                     ),
+                    const Spacer(),
                     IconButton(
                         onPressed: () {
                           cubit.deleteProductsFromOrder(product);
@@ -156,9 +153,9 @@ class CardModifyProductWidget extends StatelessWidget {
                         generalProducts: cubit.generator,
                       );
                     }
-                    return Text('data');
+                    return const Text('data');
                   } else {
-                    return SizedBox();
+                    return const SizedBox();
                   }
                 }),
                 TextButton(

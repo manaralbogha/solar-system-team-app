@@ -5,19 +5,19 @@ import 'package:solar_system_team/layout/home_solar_system_team_screen/cubit/sta
 
 import '../../../../models/model_get_appointment_team.dart';
 import '../../../../shared/components/row_text_text_widget.dart';
-import '../../../../shared/components/text_form_filed_widget.dart';
+
 import '../../../../shared/const/const.dart';
 import '../../cubit/cubit.dart';
 import '../container_user_details_widget/container_user_details_widget.dart';
 import 'dialog_for_number_of_installation_days_widget/dialog_for_number_of_installation_days_widget.dart';
 
 class CardHomeSolarSystemTeamWidget extends StatelessWidget {
-  CardHomeSolarSystemTeamWidget(
+  const CardHomeSolarSystemTeamWidget(
       {super.key,
       required this.teamAppointment,
       required this.teamAppointments});
-  DataAppointment teamAppointment;
-  List<DataAppointment>? teamAppointments;
+  final DataAppointment teamAppointment;
+  final List<DataAppointment>? teamAppointments;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,15 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
         return Card(
           margin: EdgeInsets.all(6),
           shape: RoundedRectangleBorder(
-            side: const BorderSide(
+            side: BorderSide(
               width: 1.5,
-              // color: Colors.green,
+              color: teamAppointment.status == 'done'
+                  ? Colors.green
+                  : teamAppointment.status == 'accepted'
+                      ? Colors.blue
+                      : teamAppointment.status == 'rejected'
+                          ? Colors.red
+                          : Colors.orange,
             ),
             borderRadius: BorderRadius.circular(8.0),
           ),
@@ -42,12 +48,18 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'APPOINTMENT',
                   style: TextStyle(
                     fontSize: 23,
                     fontWeight: FontWeight.bold,
-                    color: Colors.brown,
+                    color: teamAppointment.status == 'done'
+                        ? Colors.green
+                        : teamAppointment.status == 'accepted'
+                            ? Colors.blue
+                            : teamAppointment.status == 'rejected'
+                                ? Colors.red
+                                : Colors.orange,
                   ),
                 ),
                 RowTextText(
@@ -61,7 +73,13 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
                 RowTextText(
                   name: 'Order status : ',
                   number: teamAppointment.status.toString(),
-                  color: Colors.orange,
+                  color: teamAppointment.status == 'done'
+                      ? Colors.green
+                      : teamAppointment.status == 'accepted'
+                          ? Colors.blue
+                          : teamAppointment.status == 'rejected'
+                              ? Colors.red
+                              : Colors.orange,
                 ),
                 RowTextText(
                   name: 'Execution start time : ',
@@ -75,21 +93,35 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
                 ),
                 RowTextText(
                   name: 'Total execution time : ',
-                  number: "${teamAppointment.days}  DAY".toString(),
+                  number: teamAppointment.days == 1
+                      ? "${teamAppointment.days}  DAY".toString()
+                      : "${teamAppointment.days}  DAYS".toString(),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 if (teamAppointment.customerDetails == true)
-                  const ContainerUserDetailsWidget(),
+                  ContainerUserDetailsWidget(teamAppointment: teamAppointment),
                 Row(
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        foregroundColor: Color(0xff964B00),
-                        side: const BorderSide(
-                          color: Color(0xff964B00),
+                        foregroundColor: teamAppointment.status == 'done'
+                            ? Colors.green
+                            : teamAppointment.status == 'accepted'
+                                ? Colors.blue
+                                : teamAppointment.status == 'rejected'
+                                    ? Colors.red
+                                    : Colors.orange,
+                        side: BorderSide(
+                          color: teamAppointment.status == 'done'
+                              ? Colors.green
+                              : teamAppointment.status == 'accepted'
+                                  ? Colors.blue
+                                  : teamAppointment.status == 'rejected'
+                                      ? Colors.red
+                                      : Colors.orange,
                           width: 1,
                         ),
                       ),
@@ -112,7 +144,7 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
                           ? const Text('Show Customer Details')
                           : const Text('Lass Details'),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     ElevatedButton(
                       onPressed: () {
                         cubit.orderById = null;
@@ -128,13 +160,37 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
                           element.customerDetails = false;
                         });
                       },
-                      child: Text('Open'),
+                      child: const Text('Open'),
                     ),
                   ],
                 ),
                 if (teamAppointment.type == 'detection')
                   DialogForNumberOfInstallationDaysWidget(
-                      idOrder: teamAppointment.id!.toInt()),
+                    idOrder: teamAppointment.id!.toInt(),
+                  ),
+                if (teamAppointment.type == 'installation' &&
+                    teamAppointment.status == 'accepted')
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        cubit.orderStatus(
+                          idOrder: teamAppointment.id!.toInt(),
+                          status: "Done",
+                          token: token,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                          // backgroundColor: Colors.white,
+                          // foregroundColor: Color(0xff964B00),
+                          // side: const BorderSide(
+                          //   color: Color(0xff964B00),
+                          //   width: 1,
+                          // ),
+                          ),
+                      child: const Text('done'),
+                    ),
+                  )
               ],
             ),
           ),

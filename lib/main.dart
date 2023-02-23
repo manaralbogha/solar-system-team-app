@@ -33,11 +33,17 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => LoginScreen(),
+          '/': (context) => const LoginScreen(),
           '/HomeSolarSystemTeamScreen': (context) =>
-              HomeSolarSystemTeamScreen(),
-          '/OrderScreen': (context) => OrderScreen(),
-          '/ModifyProductsScreen': (context) => ModifyProductsScreen()
+              const HomeSolarSystemTeamScreen(),
+          '/OrderScreen': (context) => const OrderScreen(),
+          '/ModifyProductsScreen': (context) => const ModifyProductsScreen()
+        },
+        builder: (context, child) {
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 0.92,),
+            child: child as Widget,
+          );
         },
       ),
     );

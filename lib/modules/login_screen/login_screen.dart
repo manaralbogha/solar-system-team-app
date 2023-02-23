@@ -152,6 +152,7 @@ class LoginScreen extends StatelessWidget {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your password';
                           }
+                          return null;
                         },
                       ),
                       SizedBox(

@@ -271,6 +271,20 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
     });
   }
 
+  void orderStatus(
+      {required String token, required String status, required int idOrder}) {
+    DioHelper.postData(
+            url: '$endPoint/appointment/OrderStatus/$idOrder?',
+            data: {},
+            query: {'status': status},
+            token: token)
+        .then((value) {
+      print(value.data);
+    }).catchError((error) {
+      print(error.toString());
+    });
+  }
+
   // void location(double lat, double lng) {
   //   DioHelper.getData(
   //           url:
