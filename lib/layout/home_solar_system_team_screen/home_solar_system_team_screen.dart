@@ -39,7 +39,13 @@ class HomeSolarSystemTeamScreen extends StatelessWidget {
         //   element.customerDetails = false;
         // });
         return Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: const Center(
+                child: Text(
+              'APPOINTMENTS',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            )),
+          ),
           body: ConditionalBuilder(
             condition: state is! AppointmentTeamLoadingState,
             builder: (context) {

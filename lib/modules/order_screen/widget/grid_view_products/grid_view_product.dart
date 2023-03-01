@@ -27,7 +27,7 @@ class GridViewProductWidget extends StatelessWidget {
       builder: (context, state) {
         var cubit = HomeSolarSystemTeamCubit.get(context);
         return Container(
-          height: 400,
+          height: teamAppointment.type == "maintenance" ? double.infinity : 400,
           decoration: BoxDecoration(
             color: const Color.fromARGB(19, 33, 149, 243),
             borderRadius: const BorderRadius.all(
@@ -48,7 +48,8 @@ class GridViewProductWidget extends StatelessWidget {
           child: Column(
             children: [
               Builder(builder: (context) {
-                if (teamAppointment.type == "detection") {
+                if (teamAppointment.type == "detection" ||
+                    teamAppointment.type == "maintenance") {
                   return Row(
                     children: [
                       Text(

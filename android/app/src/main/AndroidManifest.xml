@@ -4,6 +4,8 @@
         android:label="solar_system_team"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyBxXrXf1J68WjpFPivJ2G2J34i9jHQpQ3M"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

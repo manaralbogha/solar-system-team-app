@@ -32,20 +32,26 @@ class OrderScreen extends StatelessWidget {
             condition: state is! ShowDetailsLoadingState,
             builder: (context) {
               if (state is! ShowDetailsErrorsState) {
-                return SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      GridViewProductWidget(
-                          products: cubit.orderById!.data!.products,
-                          orderById: cubit.orderById,
-                          teamAppointment: teamAppointment),
-                      GridViewDeviceWidget(
-                          devices: cubit.orderById!.data!.devices,
-                          teamAppointment: teamAppointment),
-                    ],
-                  ),
-                );
+                if (teamAppointment.type != "maintenance") {
+                  return SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      children: [
+                        GridViewProductWidget(
+                            products: cubit.orderById!.data!.products,
+                            orderById: cubit.orderById,
+                            teamAppointment: teamAppointment),
+                        GridViewDeviceWidget(
+                            devices: cubit.orderById!.data!.devices,
+                            teamAppointment: teamAppointment),
+                      ],
+                    ),
+                  );
+                }
+                return GridViewProductWidget(
+                    products: cubit.orderById!.data!.products,
+                    orderById: cubit.orderById,
+                    teamAppointment: teamAppointment);
               } else {
                 return const Center(child: Text('No Internet'));
               }

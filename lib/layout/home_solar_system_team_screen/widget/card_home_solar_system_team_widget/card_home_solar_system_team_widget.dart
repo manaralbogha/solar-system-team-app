@@ -44,59 +44,146 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
           ),
           elevation: 6,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'APPOINTMENT',
-                  style: TextStyle(
-                    fontSize: 23,
-                    fontWeight: FontWeight.bold,
-                    color: teamAppointment.status == 'done'
-                        ? Colors.green
-                        : teamAppointment.status == 'accepted'
-                            ? Colors.blue
-                            : teamAppointment.status == 'rejected'
-                                ? Colors.red
-                                : Colors.orange,
+                Center(
+                  child: Text(
+                    teamAppointment.compane!.name.toString(),
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: teamAppointment.status == 'done'
+                          ? Colors.green
+                          : teamAppointment.status == 'accepted'
+                              ? Colors.blue
+                              : teamAppointment.status == 'rejected'
+                                  ? Colors.red
+                                  : Colors.orange,
+                    ),
                   ),
                 ),
-                RowTextText(
-                  name: 'Company name : ',
-                  number: teamAppointment.compane!.name.toString(),
+                SizedBox(
+                  height: 10,
                 ),
-                RowTextText(
-                  name: 'Order type : ',
-                  number: teamAppointment.type.toString(),
+                // RowTextText(
+                //   name: 'Company name : ',
+                //   number: teamAppointment.compane!.name.toString(),
+                // ),
+                Row(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8.0),
+                        ),
+                        color: Colors.green.shade50,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          teamAppointment.type.toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.grey.shade700,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8.0),
+                        ),
+                        color: teamAppointment.status == 'done'
+                            ? Colors.green.shade50
+                            : teamAppointment.status == 'pending'
+                                ? Colors.orange.shade50
+                                : teamAppointment.status == 'accepted'
+                                    ? Colors.green.shade50
+                                    : Colors.red.shade50,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          teamAppointment.status.toString(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: teamAppointment.status == 'done'
+                                ? Colors.green
+                                : teamAppointment.status == 'accepted'
+                                    ? Colors.blue
+                                    : teamAppointment.status == 'rejected'
+                                        ? Colors.red
+                                        : Colors.orange,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                RowTextText(
-                  name: 'Order status : ',
-                  number: teamAppointment.status.toString(),
-                  color: teamAppointment.status == 'done'
-                      ? Colors.green
-                      : teamAppointment.status == 'accepted'
-                          ? Colors.blue
-                          : teamAppointment.status == 'rejected'
-                              ? Colors.red
-                              : Colors.orange,
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.indigo.shade300),
+                    children: <TextSpan>[
+                      // const TextSpan(
+                      //     text: 'The Date Of Execution Of The Order\n'),
+                      const TextSpan(
+                        text: "Data :  ",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+
+                      TextSpan(
+                        text:
+                            teamAppointment.startTime.toString() == '0001-01-01'
+                                ? '-  -  -  -  -'
+                                : ' ${teamAppointment.startTime.toString()}',
+                        style: const TextStyle(
+                          color: Colors.green,
+                        ),
+                      ),
+                      const TextSpan(text: '   '),
+
+                      TextSpan(
+                        text:
+                            teamAppointment.startTime.toString() == '0001-01-01'
+                                ? '-  -  -  -  -'
+                                : ' ${teamAppointment.finishTime.toString()}',
+                        style: const TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                      const TextSpan(text: '   '),
+                      TextSpan(
+                        text:
+                            teamAppointment.startTime.toString() != '0001-01-01'
+                                ? teamAppointment.days == 1
+                                    ? "${teamAppointment.days}  DAY".toString()
+                                    : "${teamAppointment.days}  DAYS".toString()
+                                : '-  -  -  -  -',
+                      )
+                    ],
+                  ),
                 ),
-                RowTextText(
-                  name: 'Execution start time : ',
-                  number: teamAppointment.startTime.toString(),
-                  color: Colors.green,
-                ),
-                RowTextText(
-                  name: 'Execution end time : ',
-                  number: teamAppointment.finishTime.toString(),
-                  color: Colors.red,
-                ),
-                RowTextText(
-                  name: 'Total execution time : ',
-                  number: teamAppointment.days == 1
-                      ? "${teamAppointment.days}  DAY".toString()
-                      : "${teamAppointment.days}  DAYS".toString(),
-                ),
+
+                // RowTextText(
+                //   name: 'Total execution time : ',
+                //   number: teamAppointment.days == 1
+                //       ? "${teamAppointment.days}  DAY".toString()
+                //       : "${teamAppointment.days}  DAYS".toString(),
+                // ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -164,7 +251,8 @@ class CardHomeSolarSystemTeamWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                if (teamAppointment.type == 'detection')
+                if (teamAppointment.type == 'detection' ||
+                    teamAppointment.type == "maintenance")
                   DialogForNumberOfInstallationDaysWidget(
                     idOrder: teamAppointment.id!.toInt(),
                   ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'layout/home_solar_system_team_screen/cubit/cubit.dart';
 import 'layout/home_solar_system_team_screen/home_solar_system_team_screen.dart';
+import 'modules/google_map/google_map.dart';
 import 'modules/login_screen/login_screen.dart';
 import 'modules/modify_products_screen/modify_products_screen.dart';
 import 'modules/order_screen/order_screen.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.green,
+          primarySwatch: Colors.blue,
         ),
         initialRoute: '/',
         routes: {
@@ -37,11 +38,14 @@ class MyApp extends StatelessWidget {
           '/HomeSolarSystemTeamScreen': (context) =>
               const HomeSolarSystemTeamScreen(),
           '/OrderScreen': (context) => const OrderScreen(),
-          '/ModifyProductsScreen': (context) => const ModifyProductsScreen()
+          '/ModifyProductsScreen': (context) => const ModifyProductsScreen(),
+          '/googleMap': (context) => googleMap(),
         },
         builder: (context, child) {
           return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 0.92,),
+            data: MediaQuery.of(context).copyWith(
+              textScaleFactor: 0.92,
+            ),
             child: child as Widget,
           );
         },

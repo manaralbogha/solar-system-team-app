@@ -21,6 +21,7 @@ class DialogForNumberOfInstallationDaysWidget extends StatelessWidget {
           width: double.infinity,
           child: ElevatedButton(
             onPressed: () {
+              cubit.installationDayController.text = '';
               showDialog<void>(
                 context: context,
                 barrierDismissible: false, // user must tap button!
