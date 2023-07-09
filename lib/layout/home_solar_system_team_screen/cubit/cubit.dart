@@ -42,12 +42,13 @@ class HomeSolarSystemTeamCubit extends Cubit<HomeSolarSystemTeamStates> {
     required String token,
     required int? idOrder,
   }) {
+    print(idOrder);
     emit(ShowDetailsLoadingState());
     DioHelper.getData(url: "$endPoint/order/show/$idOrder", token: token)
         .then((value) {
-      print(value.data);
+      // print(value.data);
       orderById = OrderByIdModel.fromJson(value.data);
-      print(orderById!.data!.user!.phone);
+//print(orderById!);
       emit(ShowDetailsSuccessState());
     }).catchError((error) {
       print(error.toString());

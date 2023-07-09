@@ -20,7 +20,9 @@ class OrderScreen extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     DataAppointment teamAppointment = arg['teamAppointment'];
     var cubit = HomeSolarSystemTeamCubit.get(context);
+    print(teamAppointment.id);
     cubit.getOrderById(token: token, idOrder: teamAppointment.id);
+
     return BlocConsumer<HomeSolarSystemTeamCubit, HomeSolarSystemTeamStates>(
       listener: (context, state) {
         // TODO: implement listener

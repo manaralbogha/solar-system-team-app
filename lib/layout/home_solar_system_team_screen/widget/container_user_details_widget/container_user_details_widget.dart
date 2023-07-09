@@ -41,14 +41,6 @@ class ContainerUserDetailsWidget extends StatelessWidget {
                                   : Colors.orange,
                     )),
                 padding: const EdgeInsets.all(6),
-
-                // color: teamAppointment.status == 'done'
-                //     ? Colors.green.shade100
-                //     : teamAppointment.status == 'accepted'
-                //         ? Colors.blue.shade100
-                //         : teamAppointment.status == 'rejected'
-                //             ? Colors.red.shade100
-                //             : Colors.orange.shade100,
                 child: Column(
                   children: [
                     const Text(
@@ -59,9 +51,13 @@ class ContainerUserDetailsWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                     RowTextText(
+                        sized: 100,
+                        sized1: 100,
                         name: 'Customer Name : ',
                         number: "${cubit.orderById!.data!.user!.name}"),
                     RowTextText(
+                        sized: 100,
+                        sized1: 100,
                         name: 'Customer Phone : ',
                         number: "${cubit.orderById!.data!.user!.phone}"),
                     TextButton(
